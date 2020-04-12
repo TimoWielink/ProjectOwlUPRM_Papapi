@@ -8,6 +8,53 @@ const ws = require('websocket-stream')
 const port = 1883
 const wsPort = 8888
 
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const { pool } = require('./config')
+
+const app = express()
+
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+
+//SQL
+const getBooks = (request, response) => {
+  pool.query('SELECT * FROM payload', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+onst addBook = (request, response) => {
+  const {payload } = request.body
+
+  pool.query('INSERT INTO pyload (pyload) VALUES ($1)', [packet.pyload.toString(), error => {
+    if (error) {
+      throw error
+    }
+    response.status(201).json({ status: 'success', message: 'payload added.' })
+  })
+}
+
+app
+  .route('/payload')
+  // GET endpoint
+  .get(getBooks)
+  // POST endpoint
+  .post(addBook)
+
+// Start server
+app.listen(process.env.PORT || 3002, () => {
+  console.log(`Server listening`)
+})
+
+
+/////////////////
+
 server.listen(port, function () {
   console.log('server listening on port', port)
 })
