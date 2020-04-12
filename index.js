@@ -29,10 +29,10 @@ const getBooks = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
-onst addBook = (request, response) => {
+const addBook = (request, response) => {
   const {payload } = request.body
 
-  pool.query('INSERT INTO pyload (pyload) VALUES ($1)', [packet.pyload.toString(), error => {
+  pool.query('INSERT INTO pyload (pyload) VALUES ($1)', [packet.pyload.toString()], error => {
     if (error) {
       throw error
     }
