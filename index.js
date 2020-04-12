@@ -33,10 +33,17 @@ aedes.on('publish', function (packet, client) {
     console.log('message from client', client.id)
   }
 })
+
+
+
   // fired when a message is published
   aedes.on('publish', async function (packet, client) {
     console.log('Client \x1b[31m' + (client ? client.id : 'BROKER_' + aedes.id) + '\x1b[0m has published', packet.payload.toString(), 'on', packet.topic, 'to broker', aedes.id)
+    console.log(packet.payload.toString())
   })
+
+
+
     // fired when a client disconnects
   aedes.on('clientDisconnect', function (client) {
     console.log('Client Disconnected: \x1b[31m' + (client ? client.id : client) + '\x1b[0m', 'to broker', aedes.id)
