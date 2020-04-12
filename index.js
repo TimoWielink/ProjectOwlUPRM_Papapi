@@ -1,7 +1,7 @@
 
 'use strict'
 
-const aedes = require('./aedes')()
+const aedes = require('aedes')()
 const server = require('net').createServer(aedes.handle)
 const httpServer = require('http').createServer()
 const ws = require('websocket-stream')
